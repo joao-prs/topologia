@@ -2,4 +2,4 @@
   https://www.youtube.com/watch?v=5AI7mbh4p08
 
 ### uma imagem da topologia da estrutura desse diretório
-![imagem base](vpc-tf.drawio.png)
+![imagem](vpc-tf.drawio.png)
