@@ -24,3 +24,20 @@ resource "aws_subnet" "this" {
     Name = each.key
   }
 } # cria as subnets com base no arquivo variables.tf 
+
+
+resource "aws_nat_gateway" "this" {
+  for_each = toset(locals.private_subnets)
+
+  allocation_id = aws_eip.nat_gateway[each.value].id
+  # precisa do elastic IP
+  subnet_id = aws_subnet.this[local.subnet_pairs[each.value]].id
+}
+
+
+resource "aws_eip" "nat_gateway" {
+  for_each = toset(local.private_subnets)
+  vpc      = true
+
+  depends_on = [aws_internet_gateway.this]
+}
